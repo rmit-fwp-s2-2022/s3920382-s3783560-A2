@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700;900&display=swap');
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +12,20 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.custom-nav {
+  font-family: Roboto Slab, serif;
+  color: #D6D5B3
+}
+
+.custom-nav:hover {
+  color: #7F7DA1;
+  font-weight: 700;
+}
+
+.custom-nav-bold {
+  font-family: Roboto Slab, serif;
+  color: #D6D5B3;
+  font-weight: 900
 }
