@@ -25,7 +25,7 @@ export default function App() {
     <div className="d-flex flex-column min-vh-100">
       <Router>
         <Navbar user={user} logoutUser={logoutUser} />
-        <main role="main">
+        <main role="main" style={{minHeight:'84.5vh', backgroundColor:'#353535'}}>
           <div className="container my-3">
             <Routes>
               <Route path="/" element={<Home user={user} />} />
