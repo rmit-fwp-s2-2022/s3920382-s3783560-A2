@@ -37,6 +37,10 @@ code {
   font-size: 25px;
 }
 
+.nav-item {
+  padding-left: 15px;
+}
+
 .custom-nav:hover {
   color: var(--hover-color);
 }
@@ -81,7 +85,7 @@ code {
   font-family: Roboto Slab, serif;
   color: var(--primary-color);
   padding: 5px 35px 8px 135px;
-  background-color: #7F7DA150;
+  background-color: #7f7da127;
   font-size: 60px;
 }
 
