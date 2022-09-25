@@ -86,6 +86,7 @@ export default function Register(props) {
   };
 
   return (
+    <div className="d-flex justify-content-center">
     <div className="custom-input custom-subheading">
       <h1 className="custom-subheading">Register</h1>
       <hr />
@@ -141,6 +142,7 @@ export default function Register(props) {
           </form>
         </div>
       </div>
+    </div>
     </div>
   );
 }

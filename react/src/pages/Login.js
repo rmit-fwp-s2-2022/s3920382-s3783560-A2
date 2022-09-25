@@ -32,6 +32,7 @@ export default function Login(props) {
   };
 
   return (
+    <div className="d-flex justify-content-center">
     <div className="custom-subheading">
       <h1>Login</h1>
       <hr />
@@ -59,6 +60,7 @@ export default function Login(props) {
           </form>
         </div>
       </div>
+    </div>
     </div>
   );
 }
