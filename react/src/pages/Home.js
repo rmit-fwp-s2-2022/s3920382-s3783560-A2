@@ -1,18 +1,19 @@
 import React from "react";
-import logo from "../logo.svg";
+import image from "../stock-laptop-forum.png";
 import "../index.css"
 
 export default function Home(props) {
   return (
-    <div className="text-center custom-subheading">
-      <div>
-        <h1 className="display-2" style={{display:'inline'}}>Loop &#x25AA; Agile &#x25AA;</h1>
-        <p className="display-2 custom-subheading-bold"style={{display:'inline'}}> Now</p>
+    <div className="d-flex justify-content-between home-main">  {/* Flex to float image to the right, text to the left */}
+      <div className="d-flex align-items-center" >    {/* Flex to float text vertically */}    
+        <div className="hero-title-box d-flex flex-column align-items-center">    {/* Vertically floated text div */}
+          <h1 className="hero-title-text">Loop Agile</h1>
+          <p className="hero-title-bold hero-title-text"><em>Now</em></p>
+        </div>
       </div>
-      <br/>
-      <p className="custom-content">Lorem ipsum ostrud magna ex exercitation tempor.</p>
-      {props.user !== null && <h4><strong>Hello {props.user.first_name} {props.user.last_name}!</strong></h4>}
-      <img src={logo} className="w-75" alt="logo" />
+      <div>
+        <img src={image} className="w-75 hero-image" alt="logo" />
+      </div>
     </div>
-  );
+  )
 }

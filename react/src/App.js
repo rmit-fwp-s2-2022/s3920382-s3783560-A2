@@ -25,8 +25,7 @@ export default function App() {
     <div className="d-flex flex-column min-vh-100">
       <Router>
         <Navbar user={user} logoutUser={logoutUser} />
-        <main role="main" style={{minHeight:'84.5vh', backgroundColor:'#353535'}}>
-          <div className="container my-3 d-flex justify-content-center" style={{paddingTop:'30px'}}>
+        <main role="main" style={{minHeight:'82.65vh', backgroundColor:'#353535'}}>
             <Routes>
               <Route path="/" element={<Home user={user} />} />
               <Route path="/login" element={<Login loginUser={loginUser} />} />
@@ -34,7 +33,6 @@ export default function App() {
               <Route path="/profile" element={<MyProfile user={user} />} />
               <Route path="/forum" element={<Forum user={user} />} />
             </Routes>
-          </div>
         </main>
         <Footer />
       </Router>
