@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;300;400;700;900&display=swap');
 
 body {
   margin: 0;
@@ -16,7 +16,8 @@ code {
 
 .custom-nav {
   font-family: Roboto Slab, serif;
-  color: #D6D5B3
+  color: #B75D69;
+  font-size: 25px;
 }
 
 .custom-nav:hover {
@@ -26,6 +27,31 @@ code {
 
 .custom-nav-bold {
   font-family: Roboto Slab, serif;
-  color: #D6D5B3;
+  color: #B75D69;
   font-weight: 900
+}
+
+.no-hover:hover {
+  color: #B75D69;
+  font-weight: 400;
+}
+
+.custom-input {
+  width: 400px;
+}
+
+.custom-subheading {
+  color: #D6D5B3;
+  font-family: Roboto Slab, serif;
+  font-weight: 400;
+}
+
+.custom-subheading-bold {
+  font-weight: 900;
+}
+
+.custom-content {
+  font-family: Roboto Slab, serif;
+  font-weight: 300;
+  color: #D6D5B3;
 }

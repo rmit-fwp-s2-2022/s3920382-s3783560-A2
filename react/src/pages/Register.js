@@ -86,21 +86,21 @@ export default function Register(props) {
   };
 
   return (
-    <div>
-      <h1>Register</h1>
+    <div className="custom-input custom-subheading">
+      <h1 className="custom-subheading">Register</h1>
       <hr />
       <div className="row">
         <div className="col-md-6">
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
+            <div className="form-group custom-input">
               <label htmlFor="username" className="control-label">Username</label>
               <input name="username" id="username" className="form-control"
-                value={fields.username} onChange={handleInputChange} />
+                value={fields.username} onChange={handleInputChange}/>
               {errors.username &&
                 <div className="text-danger">{errors.username}</div>
               }
             </div>
-            <div className="form-group">
+            <div className="form-group custom-input">
               <label htmlFor="firstname" className="control-label">First name</label>
               <input name="firstname" id="firstname" className="form-control"
                 value={fields.firstname} onChange={handleInputChange} />
@@ -108,7 +108,7 @@ export default function Register(props) {
                 <div className="text-danger">{errors.firstname}</div>
               }
             </div>
-            <div className="form-group">
+            <div className="form-group custom-input">
               <label htmlFor="lastname" className="control-label">Last name</label>
               <input name="lastname" id="firstname" className="form-control"
                 value={fields.lastname} onChange={handleInputChange} />
@@ -116,7 +116,7 @@ export default function Register(props) {
                 <div className="text-danger">{errors.lastname}</div>
               }
             </div>
-            <div className="form-group">
+            <div className="form-group custom-input">
               <label htmlFor="password" className="control-label">
                 Password <small className="text-muted">must be at least 6 characters</small>
               </label>
@@ -126,7 +126,7 @@ export default function Register(props) {
                 <div className="text-danger">{errors.password}</div>
               }
             </div>
-            <div className="form-group">
+            <div className="form-group custom-input">
               <label htmlFor="confirmPassword" className="control-label">Confirm password</label>
               <input type="password" name="confirmPassword" id="confirmPassword" className="form-control"
                 value={fields.confirmPassword} onChange={handleInputChange} />
@@ -134,7 +134,7 @@ export default function Register(props) {
                 <div className="text-danger">{errors.confirmPassword}</div>
               }
             </div>
-            <div className="form-group">
+            <div className="form-group custom-input">
               <input type="submit" className="btn btn-primary mr-5" value="Register" />
               <Link className="btn btn-outline-dark" to="/">Cancel</Link>
             </div>

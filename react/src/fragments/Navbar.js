@@ -6,7 +6,7 @@ export default function Navbar(props) {
   return (
     <nav className="navbar navbar-expand-lg" style={{backgroundColor:'#353535'}}>
       <div className="container">
-        <Link className="navbar-brand custom-nav" to="/" style={{fontFamily: "Roboto Slab", color:'#D6D5B3'}}>
+        <Link className="navbar-brand custom-nav no-hover" to="/">
           Loop Agile &#x25AA;
           <p className="custom-nav-bold"style={{display:'inline'}}> Now</p>
         </Link>

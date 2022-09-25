@@ -26,7 +26,7 @@ export default function App() {
       <Router>
         <Navbar user={user} logoutUser={logoutUser} />
         <main role="main" style={{minHeight:'84.5vh', backgroundColor:'#353535'}}>
-          <div className="container my-3">
+          <div className="container my-3 d-flex justify-content-center" style={{paddingTop:'30px'}}>
             <Routes>
               <Route path="/" element={<Home user={user} />} />
               <Route path="/login" element={<Login loginUser={loginUser} />} />

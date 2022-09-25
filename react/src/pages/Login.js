@@ -32,18 +32,18 @@ export default function Login(props) {
   };
 
   return (
-    <div>
+    <div className="custom-subheading">
       <h1>Login</h1>
       <hr />
       <div className="row">
         <div className="col-md-6">
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
+            <div className="form-group custom-input">
               <label htmlFor="username" className="control-label">Username</label>
               <input name="username" id="username" className="form-control"
                 value={fields.username} onChange={handleInputChange} />
             </div>
-            <div className="form-group">
+            <div className="form-group custom-input">
               <label htmlFor="password" className="control-label">Password</label>
               <input type="password" name="password" id="password" className="form-control"
                 value={fields.password} onChange={handleInputChange} />
