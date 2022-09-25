@@ -39,12 +39,17 @@ export default function Register(props) {
 
     let key = "username";
     let field = trimmedFields[key];
-    if(field.length === 0)
-      currentErrors[key] = "Username is required.";
-    else if(field.length > 32)
-      currentErrors[key] = "Username length cannot be greater than 32.";
-    else if(await findUser(trimmedFields.username) !== null)
-      currentErrors[key] = "Username is already registered.";
+    try {
+      if(field.length === 0)
+        currentErrors[key] = "Username is required.";
+      else if(field.length > 32)
+        currentErrors[key] = "Username length cannot be greater than 32.";
+      else if(await findUser(trimmedFields.username) !== null)
+        currentErrors[key] = "Username is already registered.";
+    } catch (err) {
+      setErrors({...errors, ['APIerror']: "Error reaching database, please try again later"})
+      return
+    }
 
     key = "firstname";
     field = trimmedFields[key];
@@ -139,6 +144,11 @@ export default function Register(props) {
               <input type="submit" className="btn btn-primary mr-5" value="Register" />
               <Link className="btn btn-outline-dark" to="/">Cancel</Link>
             </div>
+            {errors.APIerror !== null &&
+              <div className="form-group">
+                <span className="text-danger">{errors.APIerror}</span>
+              </div>
+            }
           </form>
         </div>
       </div>

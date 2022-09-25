@@ -14,8 +14,14 @@ export default function Login(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const user = await verifyUser(fields.username, fields.password);
+    let user = null
+    try {
+      user = await verifyUser(fields.username, fields.password);
+    } catch(err) {
+      console.log("Axios error has occurred")
+      setErrorMessage("Error reaching database, please try again later")
+      return
+    }
 
     if(user === null) {
       // Login failed, reset password field to blank and set error message.
