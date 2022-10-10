@@ -14,6 +14,7 @@ db.sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
 // Include models.
 db.user = require("./models/user.js")(db.sequelize, DataTypes);
 db.post = require("./models/post.js")(db.sequelize, DataTypes);
+db.post = require("./models/reply.js")(db.sequelize,DataTypes);
 
 // Relate post and user.
 db.post.belongsTo(db.user, { foreignKey: { name: "username", allowNull: false } });
