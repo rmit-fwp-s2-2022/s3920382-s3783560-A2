@@ -17,7 +17,8 @@ db.post = require("./models/post.js")(db.sequelize, DataTypes);
 
 // Relate post and user.
 db.post.belongsTo(db.user, { foreignKey: { name: "username", allowNull: false } });
-
+//realtes replys of post
+db.reply.hasMany(db.post,{ foreignKey : {reply_id : 'post_id', allowNull : false}});
 // Learn more about associations here: https://sequelize.org/master/manual/assocs.html
 
 // Include a sync option with seed data logic included.
