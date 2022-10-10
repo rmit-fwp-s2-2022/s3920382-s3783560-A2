@@ -1,6 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function MyProfile(props) {
+  const navigate = useNavigate();
+
   return (
     <div>
     <h1 className= 'text-center' style={{paddingTop: 30}}>My profile</h1>
@@ -19,9 +22,12 @@ export default function MyProfile(props) {
                     </div>
                     <div className = ' container d-flex justify-content-between'>
                         <button type = 'button' className='btn btn-lg btn-info btn-rounded w-50 m-3'
-                        
+                        onClick = {() => {
+                          navigate("/update", {replace : true,})
+                        }}
                         >
                             Edit
+                
                         </button>
                         <br/>
                         <br/>
