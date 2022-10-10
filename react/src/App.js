@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import MyProfile from "./pages/MyProfile";
 import Forum from "./pages/Forum";
+import Update from "./pages/Update";
 import { getUser, removeUser } from "./data/repository";
 
 export default function App() {
@@ -32,6 +33,7 @@ export default function App() {
               <Route path="/register" element={<Register loginUser={loginUser} />} />
               <Route path="/profile" element={<MyProfile user={user} />} />
               <Route path="/forum" element={<Forum user={user} />} />
+              <Route path ='/update' element = {<Update user = {user} />}/>
             </Routes>
         </main>
         <Footer />
