@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) =>
       autoIncrement: true,
       primaryKey: true
     },
+
     text: {
       type: DataTypes.TEXT,
       allowNull: false

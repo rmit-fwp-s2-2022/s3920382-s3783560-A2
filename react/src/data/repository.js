@@ -40,6 +40,11 @@ async function createPost(post) {
 
   return response.data;
 }
+// --- Reply ---------------------------------------------------------------------------------------
+async function createReply(reply) {
+  const response = await axios.post(API_HOST + "/api/reply", reply)
+  return response.data
+}
 
 // --- Helper functions to interact with local storage --------------------------------------------
 function setUser(user) {
@@ -57,5 +62,5 @@ function removeUser() {
 export {
   verifyUser, findUser, createUser,
   getPosts, createPost,
-  getUser, removeUser
+  getUser, removeUser,createReply
 }

@@ -1,13 +1,5 @@
 const db = require("../database");
 
-// Select all posts from the database. and respectively replies
-exports.all = async (req, res) => {
-  const posts = await db.post.findAll( {include:'reply'});
-
-
-  res.json(posts);
-};
-
 // Create a post in the database.
 exports.create = async (req, res) => {
   const post = await db.post.create({
