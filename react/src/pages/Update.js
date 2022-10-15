@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { updateUser, findUser } from "../data/repository";
 
 
 export default function Update(props) {
     const navigate = useNavigate()
     const [errors, setErrors] = useState({ });
-
     const [fields, setFields] = useState({
-        username: "", firstname: "", lastname: "",  password: "", 
+         firstname: "", lastname: "", 
       });
 
      // Generic change handler.
@@ -17,9 +17,51 @@ export default function Update(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const { trimmedFields, isValid } = await handleValidation();
+    if(!isValid)
+      return;
+
+    // Create user.
+    const user = await updateUser(trimmedFields);
+
 
     // Navigate to the home page.
-    navigate("/");
+    navigate("/profile");
+  };
+
+  const handleValidation = async () => {
+    const trimmedFields = trimFields();
+    const currentErrors = { };
+
+    let key = "first_name";
+    let field = trimmedFields[key];
+  
+
+    key = "firstname";
+    field = trimmedFields[key];
+    if(field.length === 0)
+      currentErrors[key] = "First name is required.";
+    else if(field.length > 40)
+      currentErrors[key] = "First name length cannot be greater than 40.";
+
+    key = "lastname";
+    field = trimmedFields[key];
+    if(field.length === 0)
+      currentErrors[key] = "Last name is required.";
+    else if(field.length > 40)
+      currentErrors[key] = "Last name length cannot be greater than 40.";
+
+    setErrors(currentErrors);
+
+    return { trimmedFields, isValid: Object.keys(currentErrors).length === 0 };
+  };
+
+  const trimFields = () => {
+    const trimmedFields = { };
+    Object.keys(fields).map(key => trimmedFields[key] = fields[key].trim());
+    setFields(trimmedFields);
+
+    return trimmedFields;
   };
 
 

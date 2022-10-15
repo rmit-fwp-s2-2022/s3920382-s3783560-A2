@@ -6,7 +6,7 @@ module.exports = (express, app) => {
   router.get("/", controller.all);
 
   // Select a single user with id.
-  router.get("/select/:id", controller.one);
+  router.get("/select/:username", controller.one);
 
   // Select one user from the database if username and password are a match.
   router.get("/login", controller.login);
@@ -18,7 +18,7 @@ module.exports = (express, app) => {
   router.post("/", controller.create);
 
   //update user
-  router.update("/",controller.update)
+  router.put("/",controller.update)
 
   // Add routes to server.
   app.use("/api/users", router);
