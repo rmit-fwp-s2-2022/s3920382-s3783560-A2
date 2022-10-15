@@ -34,7 +34,7 @@ export default function Login(props) {
     props.loginUser(user);
 
     // Navigate to the home page.
-    navigate("/profile");
+    navigate("/forum");
   };
 
   return (
@@ -47,7 +47,7 @@ export default function Login(props) {
           <form onSubmit={handleSubmit}>
             <div className="form-group custom-input">
               <label htmlFor="username" className="control-label">Username</label>
-              <input name="username" id="username" className="form-control"
+              <input name="username" type="email" id="username" className="form-control"
                 value={fields.username} onChange={handleInputChange} />
             </div>
             <div className="form-group custom-input">
