@@ -59,8 +59,14 @@ export default function Forum(props) {
             </div>
           }
           <div className="form-group">
-            <input type="button" className="btn btn-danger mr-5" value="Cancel" onClick={resetPostContent} />
-            <input type="submit" className="btn btn-primary" value="Post" />
+            <input type="button" 
+              className="btn btn-danger mr-5" 
+              value="Cancel" 
+              onClick={resetPostContent} />
+            <input type="submit" 
+              className="btn btn-primary" 
+              value="Post" 
+              />
           </div>
         </fieldset>
       </form>
