@@ -1,5 +1,6 @@
 const db = require("../database");
 const argon2 = require("argon2");
+const { user } = require("../database");
 
 // Select all users from the database.
 exports.all = async (req, res) => {
@@ -41,5 +42,14 @@ exports.create = async (req, res) => {
 };
 
 exports.delete = async (req,res) => {
-  const user = await db.user.destroy(req.query.username);
+  const username = await db.user.destroy(req.body.id);
+  res.json(username)
+}
+
+exports.update = async (req,res) =>{
+  const profile = await db.user.findByPk(req.body.email);
+
+  //update first and last name.
+  user.first_name = req.body.first_name;
+  user.last_name = req.body.last_name;
 }
