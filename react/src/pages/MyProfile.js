@@ -6,6 +6,7 @@ export default function MyProfile(props) {
   const navigate = useNavigate();
   const handleClick  =  (event)=> {
     deleteUser(props.user.username)
+    props.logoutUser()
     
     navigate('/', {replace :true,})
     

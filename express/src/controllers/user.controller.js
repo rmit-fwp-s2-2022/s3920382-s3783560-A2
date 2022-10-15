@@ -42,7 +42,7 @@ exports.create = async (req, res) => {
 };
 //delete user
 exports.delete = async (req,res) => {
-  const username = await db.user.destroy(req.params.id);
+  const username = await db.user.destroy({ where: {username: req.params.username}});
   res.json(username)
 }
 //update profile
