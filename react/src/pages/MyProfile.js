@@ -1,8 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { deleteUser } from "../data/repository";
 
 export default function MyProfile(props) {
   const navigate = useNavigate();
+  const handleClick  =  (event)=> {
+    deleteUser(props.user.username)
+    
+    navigate('/', {replace :true,})
+    
+
+  }
+  
 
   return (
     <div>
@@ -32,8 +41,7 @@ export default function MyProfile(props) {
                         <br/>
                         <br/>
                         <button type = 'button' className='btn btn-lg btn-danger btn-rounded w-50 m-3'
-                        data-bs-toggle = 'modal' 
-                        data-bs-target = '#exampleModal'
+                        onClick = {handleClick}
                         >
                             Delete
                         </button>
