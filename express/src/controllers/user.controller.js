@@ -39,3 +39,7 @@ exports.create = async (req, res) => {
 
   res.json(user);
 };
+
+exports.delete = async (req,res) => {
+  const user = await db.user.destroy(req.query.username);
+}
