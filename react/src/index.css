@@ -31,6 +31,10 @@ code {
     monospace;
 }
 
+.bg-color {
+  background-color: var(--bg-color);
+}
+
 .custom-nav {
   font-family: Roboto Slab, serif;
   color: var(--secondary-color);

@@ -41,11 +41,11 @@ export default function Register(props) {
     let field = trimmedFields[key];
     try {
       if(field.length === 0)
-        currentErrors[key] = "Username is required.";
+        currentErrors[key] = "Email is required.";
       else if(field.length > 32)
-        currentErrors[key] = "Username length cannot be greater than 32.";
+        currentErrors[key] = "Email length cannot be greater than 32.";
       else if(await findUser(trimmedFields.username) !== null)
-        currentErrors[key] = "Username is already registered.";
+        currentErrors[key] = "Email is already registered.";
     } catch (err) {
       setErrors({...errors, ['APIerror']: "Error reaching database, please try again later"})
       return
@@ -99,8 +99,8 @@ export default function Register(props) {
         <div className="col-md-6">
           <form onSubmit={handleSubmit}>
             <div className="form-group custom-input">
-              <label htmlFor="username" className="control-label">Username</label>
-              <input name="username" id="username" className="form-control"
+              <label htmlFor="username" className="control-label">Email</label>
+              <input name="username"  type="email" id="username" className="form-control"
                 value={fields.username} onChange={handleInputChange}/>
               {errors.username &&
                 <div className="text-danger">{errors.username}</div>

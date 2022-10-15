@@ -43,7 +43,7 @@ export default function Navbar(props) {
               :
               <>
                 <li className="nav-item">
-                  <span className="nav-link custom-nav no-hover">Welcome, {props.user.username}</span>
+                  <span className="nav-link custom-nav no-hover">Welcome, {props.user.first_name}</span>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link custom-nav" to="/login" onClick={props.logoutUser}>Logout</Link>

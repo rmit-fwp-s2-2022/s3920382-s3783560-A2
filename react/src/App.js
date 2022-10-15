@@ -23,10 +23,10 @@ export default function App() {
   };
 
   return (
-    <div className="d-flex flex-column min-vh-100">
+    <div className="d-flex flex-column min-vh-100 bg-color">
       <Router>
         <Navbar user={user} logoutUser={logoutUser} />
-        <main role="main" style={{minHeight:'82.65vh', backgroundColor:'#353535'}}>
+        <main role="main">
             <Routes>
               <Route path="/" element={<Home user={user} />} />
               <Route path="/login" element={<Login loginUser={loginUser} />} />
