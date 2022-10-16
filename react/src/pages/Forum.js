@@ -9,6 +9,7 @@ export default function Forum(props) {
   const [errorMessage, setErrorMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [posts, setPosts] = useState([]);
+  const [postLink, setPostLink] = useState('')
 
   const [replyTo, setReplyTo] = useState({postID: null, postOwner: null})
 
@@ -42,6 +43,10 @@ export default function Forum(props) {
     setErrorMessage(null);
   }
 
+  const onLinkChange = (e) => {
+    setPostLink(e.target.value)
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -55,7 +60,7 @@ export default function Forum(props) {
     }
 
     // Create post.
-    const newPost = { text: post, username: props.user.username, parentID: replyTo.postID};
+    const newPost = { text: post, username: props.user.username, parentID: replyTo.postID, image: postLink};
     await createPost(newPost);
 
     // Add post to locally stored posts.
@@ -80,6 +85,14 @@ export default function Forum(props) {
                 <div className="form-group bg-color-secondary" style={{ paddingBottom: "60px" }}>
                     <ReactQuill theme="snow" value={post} onChange={setPost} style={{ height: "180px" }} />
                 </div>
+                <input 
+                  className='form-control' 
+                  type='URL' 
+                  id='linkInput' 
+                  placeholder='Direct image link only' 
+                  style={{marginBottom:10}} 
+                  onChange={onLinkChange}>
+                </input>
                 {errorMessage !== null &&
                   <div className="form-group">
                     <span className="text-danger">{errorMessage}</span>
@@ -104,10 +117,10 @@ export default function Forum(props) {
       <h1 className="custom-subheading">Forum</h1>
       <div>
         {isLoading ?
-          <div>Loading posts...</div>
+          <div className="custom-subheading">Loading posts...</div>
           :
           posts.length === 0 ?
-            <span className="text-muted">No posts have been submitted.</span>
+            <span className="custom-subheading">No posts have been submitted.</span>
             :
             posts.map((x) =>
               <Post post={x} setReply={setReplyStatus}/>

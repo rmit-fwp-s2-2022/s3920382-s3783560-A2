@@ -26,6 +26,7 @@ export default function Post(props) {
                 <h6 className="text-color-primary"><strong>{props.post.username}</strong></h6>
                 <hr/>
                 <div dangerouslySetInnerHTML={{ __html: props.post.text }} />
+                {props.post.image && <div><img style={{maxWidth:500}} src={props.post.image}/></div>}
                 <button onClick={replyClick} className="btn btn-primary">Reply</button>
             </div>
             <div className="d-flex flex-column">                 
