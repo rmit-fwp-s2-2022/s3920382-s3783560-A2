@@ -79,7 +79,7 @@ export default function Update(props) {
                 <div className="form-group custom-input">
                   <label htmlFor="email" className="control-label">Email</label>
                   <input name="email" disabled={true} value={props.user.username} id="email" className="form-control text-muted"/>
-                  <small id="emailHelp" class="form-text text-muted">To change your email, please contact IT services</small>
+                  <small id="emailHelp" className="form-text text-muted">To change your email, please contact IT services</small>
                 </div>
                 <div className="form-group custom-input">
                   <label htmlFor="firstname" className="control-label">First name</label>

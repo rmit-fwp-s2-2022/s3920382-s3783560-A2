@@ -34,7 +34,7 @@ export default function Login(props) {
     props.loginUser(user);
 
     // Navigate to the home page.
-    navigate("/forum");
+    navigate("/");
   };
 
   return (
