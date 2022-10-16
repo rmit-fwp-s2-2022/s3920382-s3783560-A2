@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) =>
     text: {
       type: DataTypes.TEXT,
       allowNull: false
+    },
+
+    image: {
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   }, {
     // Don't add the timestamp attributes (updatedAt, createdAt).
