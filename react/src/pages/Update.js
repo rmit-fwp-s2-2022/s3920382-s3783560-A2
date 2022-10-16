@@ -22,7 +22,7 @@ export default function Update(props) {
       return;
 
     // Create user.
-    const user = await updateUser(trimmedFields);
+    await updateUser(trimmedFields);
 
 
     // Navigate to the home page.
