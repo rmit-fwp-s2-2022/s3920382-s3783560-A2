@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { getPosts, createPost } from "../data/repository";
+import { getParentPosts, createPost } from "../data/repository";
 import Post from "./Post";
 
 export default function Forum(props) {
@@ -10,38 +10,30 @@ export default function Forum(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [posts, setPosts] = useState([]);
 
-  const replyStatus = {isReply: false, replyTo: null}
+  const [replyTo, setReplyTo] = useState(null)
 
+  console.log(`reply to is "${replyTo}"`)
   const setReplyStatus = (replyID) => {
-    console.log(replyID)
-    console.log(replyStatus.replyTo)
-    if (replyStatus.replyTo === replyID) {
-      replyStatus.replyTo = null
-      replyStatus.isReply = false
+    if (replyTo === replyID) {
+      setReplyTo(null)
     } else {
-      replyStatus.replyTo = replyID
-      replyStatus.isReply = true
+      setReplyTo(replyID)
     }
-    console.log("Setting replyID to be")
-    console.log(replyStatus.replyTo)
   }
 
 
   // Load posts.
   useEffect(() => {
     async function loadPosts() {
-      const currentPosts = await getPosts();
+      const currentPosts = await getParentPosts();
 
       setPosts(currentPosts.slice().reverse());
       setIsLoading(false);
+      setReplyTo(null)
     }
 
     loadPosts();
   }, []);
-
-  useEffect(() => {
-    console.table(replyStatus)
-  }, [replyStatus.isReply, replyStatus.replyTo])
 
   const resetPostContent = () => {
     setPost("");
@@ -58,11 +50,11 @@ export default function Forum(props) {
     }
 
     // Create post.
-    const newPost = { text: post, username: props.user.username};
+    const newPost = { text: post, username: props.user.username, parentID: replyTo};
     await createPost(newPost);
 
     // Add post to locally stored posts.
-    setPosts([...posts, newPost]);
+    setPosts([newPost, ...posts]);
 
     resetPostContent();
   };
@@ -72,6 +64,7 @@ export default function Forum(props) {
       <form className="justify-content-center" onSubmit={handleSubmit}>
         <fieldset>
           <legend className="custom-subheading">New Post</legend>
+          {replyTo !== null && <span>in reply to post {replyTo}</span>}
           <div className="form-group bg-color-secondary" style={{ paddingBottom: "60px" }}>
               <ReactQuill theme="snow" value={post} onChange={setPost} style={{ height: "180px" }} />
           </div>
