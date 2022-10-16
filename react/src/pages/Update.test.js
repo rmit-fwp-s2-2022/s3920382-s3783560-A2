@@ -19,7 +19,5 @@ test('Email input is disabled', () =>{
     // eslint-disable-next-line testing-library/no-node-access
     
     const email = screen.getByLabelText('Email')
-    fireEvent.change(email,{target: {value:'qwe@rmit'}});
-
     expect(email).tobeDisabled();
 })
