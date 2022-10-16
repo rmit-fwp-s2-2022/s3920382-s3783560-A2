@@ -33,7 +33,7 @@ async function deleteUser (id) {
 }
 
 async function updateUser (user) {
-  const response = await axios.put(API_HOST + "/api/users",user)
+  const response = await axios.put(API_HOST + "/api/users", {user})
   return response.data
 }
 

@@ -33,7 +33,7 @@ export default function App() {
               <Route path="/register" element={<Register loginUser={loginUser} />} />
               <Route path="/profile" element={<MyProfile user={user} logoutUser={logoutUser}/>} />
               <Route path="/forum" element={<Forum user={user} />} />
-              <Route path ='/update' element = {<Update user = {user} />}/>
+              <Route path ='/update' element = {<Update user = {user} setUser = {setUser} />}/>
             </Routes>
         </main>
         <Footer />

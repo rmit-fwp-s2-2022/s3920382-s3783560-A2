@@ -40,20 +40,30 @@ exports.create = async (req, res) => {
 
   res.json(user);
 };
-//delete user
+
+// Delete user
 exports.delete = async (req,res) => {
   const username = await db.user.destroy({ where: {username: req.params.username}});
   res.json(username)
 }
-//update profile
+
+// Update user info
 exports.update = async (req,res) =>{
-  const user = await db.user.findByPk(req.body.username);
+  const user = await db.user.findByPk(req.body.user.username);
 
-  //update first and last name.
-  user.first_name = req.body.firstname;
-  user.last_name = req.body.lastname;
-
-
+  if (req.body.user.firstname) {
+    console.log("updating first_name")
+    user.first_name = req.body.user.firstname
+  }
+  if (req.body.user.lastname) {
+    console.log("updating last_name")
+    user.last_name = req.body.user.lastname
+  }
+  if (req.body.user.password) {
+    console.log("updating password")
+    user.password_hash = await argon2.hash(req.body.user.password, {type: argon2.argon2id})
+  } 
+ 
   await user.save();
   res.json(user)
 }
