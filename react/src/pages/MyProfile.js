@@ -16,7 +16,7 @@ export default function MyProfile(props) {
 
   return (
     <div>
-    <h1 className= 'text-center' style={{paddingTop: 30}}>My profile</h1>
+    <h1 className= 'text-center custom-subheading' style={{paddingTop: 30}}>My profile</h1>
         <div className = 'container py-5 h-100 w-50'>
             <div className='row d-flex justify-content-center align-items-center h-100'>
                 <div className='card w-50' style = {{borderRadius:'15px'}}>
