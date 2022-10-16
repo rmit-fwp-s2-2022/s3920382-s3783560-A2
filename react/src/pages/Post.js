@@ -13,7 +13,7 @@ export default function Post(props) {
           }
         }
         loadReplies();
-      }, []);
+      }, [replies]);
 
     const replyClick = event => {
         props.setReply({postID: props.post.post_id, postOwner: props.post.username})
