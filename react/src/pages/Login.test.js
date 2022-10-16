@@ -1,6 +1,7 @@
 import {render, fireEvent,screen} from '@testing-library/react';
 import Login from './Login'
 import '@testing-library/jest-dom'
+import { verifyUser } from '../data/repository';
 
 import { BrowserRouter as Router } from "react-router-dom"
 
@@ -15,7 +16,7 @@ beforeEach(() => {
     container = utils.container
 })
 
-test('Input in login form functional', () => {
+test('Login with false credentials', async () => {
 
 
     // eslint-disable-next-line testing-library/no-node-access
@@ -32,4 +33,7 @@ test('Input in login form functional', () => {
     fireEvent.change(password, {target: {value : '123456'}})
     expect(email.value).toBe('qwe@rmit')
     expect(password.value).toBe('123456')
+    const data = await verifyUser('qwe@rmit','123456')
+    expect(data).toBe(null)
+
 })
