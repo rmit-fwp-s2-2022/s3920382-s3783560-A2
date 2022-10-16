@@ -124,7 +124,7 @@ export default function Register(props) {
             </div>
             <div className="form-group custom-input">
               <label htmlFor="password" className="control-label">
-                Password <small className="text-muted">must be at least 6 characters</small>
+                Password <small className="text-muted">must be at least 6 characters and contain a symbol</small>
               </label>
               <input type="password" name="password" id="password" className="form-control"
                 value={fields.password} onChange={handleInputChange} />
