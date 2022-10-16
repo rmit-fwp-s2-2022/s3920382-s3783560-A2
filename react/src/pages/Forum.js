@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { getPosts, createPost } from "../data/repository";
+import Post from "./Post";
 
 export default function Forum(props) {
   const [post, setPost] = useState("");
@@ -9,17 +10,38 @@ export default function Forum(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [posts, setPosts] = useState([]);
 
+  const replyStatus = {isReply: false, replyTo: null}
+
+  const setReplyStatus = (replyID) => {
+    console.log(replyID)
+    console.log(replyStatus.replyTo)
+    if (replyStatus.replyTo === replyID) {
+      replyStatus.replyTo = null
+      replyStatus.isReply = false
+    } else {
+      replyStatus.replyTo = replyID
+      replyStatus.isReply = true
+    }
+    console.log("Setting replyID to be")
+    console.log(replyStatus.replyTo)
+  }
+
+
   // Load posts.
   useEffect(() => {
     async function loadPosts() {
       const currentPosts = await getPosts();
 
-      setPosts(currentPosts);
+      setPosts(currentPosts.slice().reverse());
       setIsLoading(false);
     }
 
     loadPosts();
   }, []);
+
+  useEffect(() => {
+    console.table(replyStatus)
+  }, [replyStatus.isReply, replyStatus.replyTo])
 
   const resetPostContent = () => {
     setPost("");
@@ -36,7 +58,7 @@ export default function Forum(props) {
     }
 
     // Create post.
-    const newPost = { text: post, username: props.user.username };
+    const newPost = { text: post, username: props.user.username};
     await createPost(newPost);
 
     // Add post to locally stored posts.
@@ -46,11 +68,11 @@ export default function Forum(props) {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="">
+      <form className="justify-content-center" onSubmit={handleSubmit}>
         <fieldset>
-          <legend>New Post</legend>
-          <div className="form-group" style={{ marginBottom: "60px" }}>
+          <legend className="custom-subheading">New Post</legend>
+          <div className="form-group bg-color-secondary" style={{ paddingBottom: "60px" }}>
               <ReactQuill theme="snow" value={post} onChange={setPost} style={{ height: "180px" }} />
           </div>
           {errorMessage !== null &&
@@ -71,7 +93,6 @@ export default function Forum(props) {
         </fieldset>
       </form>
 
-      <hr />
       <h1>Forum</h1>
       <div>
         {isLoading ?
@@ -81,10 +102,7 @@ export default function Forum(props) {
             <span className="text-muted">No posts have been submitted.</span>
             :
             posts.map((x) =>
-              <div className="border my-3 p-3">
-                <h6 className="text-primary">{x.username}</h6>
-                <div dangerouslySetInnerHTML={{ __html: x.text }} />
-              </div>
+              <Post post={x} setReply={setReplyStatus}/>
             )
         }
       </div>
