@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { getPosts, createPost } from "../data/repository";
+import { getParentPosts, createPost } from "../data/repository";
+import Post from "./Post";
 
 export default function Forum(props) {
   const [post, setPost] = useState("");
@@ -9,15 +10,30 @@ export default function Forum(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [posts, setPosts] = useState([]);
 
-  // Load posts.
-  useEffect(() => {
-    async function loadPosts() {
-      const currentPosts = await getPosts();
+  const [replyTo, setReplyTo] = useState({postID: null, postOwner: null})
 
-      setPosts(currentPosts);
-      setIsLoading(false);
+  console.log(`reply to is "${replyTo.postID}"`)
+
+  const setReplyStatus = ({postID: replyID, postOwner: owner}) => {
+    if (replyTo.postID === replyID) {
+      setReplyTo({postID: null, postOwner: null})
+    } else {
+      setReplyTo({postID: replyID, postOwner: owner })
     }
+  }
 
+
+  // Load posts.
+
+  async function loadPosts() {
+    const currentPosts = await getParentPosts();
+
+    setPosts(currentPosts.slice().reverse());
+    setIsLoading(false);
+    setReplyTo({postID: null, postOwner: null})
+  }
+
+  useEffect(() => {
     loadPosts();
   }, []);
 
@@ -33,46 +49,59 @@ export default function Forum(props) {
     if(post.replace(/<(.|\n)*?>/g, "").trim().length === 0) {
       setErrorMessage("A post cannot be empty.");
       return;
+    } else if (post.replace(/<(.|\n)*?>/g, "").trim().length > 600) {
+      setErrorMessage("Posts must be under 600 characters")
+      return
     }
 
     // Create post.
-    const newPost = { text: post, username: props.user.username };
+    const newPost = { text: post, username: props.user.username, parentID: replyTo.postID};
     await createPost(newPost);
 
     // Add post to locally stored posts.
-    setPosts([...posts, newPost]);
-
+    setPosts([newPost, ...posts]);
+    await loadPosts();
     resetPostContent();
+    
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <fieldset>
-          <legend>New Post</legend>
-          <div className="form-group" style={{ marginBottom: "60px" }}>
-              <ReactQuill theme="snow" value={post} onChange={setPost} style={{ height: "180px" }} />
+    <div className="container">
+      <div className="row">
+        <div className="col-1"></div>
+          <div className="col-10">
+            <form className="justify-content-center" onSubmit={handleSubmit}>
+              <fieldset>
+                <legend className="custom-subheading">New Post</legend>
+                {replyTo.postID !== null && 
+                <span style={{marginBottom:"20px"}} className="custom-subheading">Replying to 
+                <span className="text-color-secondary "> {replyTo.postOwner}</span>
+                </span>}
+                <div className="form-group bg-color-secondary" style={{ paddingBottom: "60px" }}>
+                    <ReactQuill theme="snow" value={post} onChange={setPost} style={{ height: "180px" }} />
+                </div>
+                {errorMessage !== null &&
+                  <div className="form-group">
+                    <span className="text-danger">{errorMessage}</span>
+                  </div>
+                }
+                <div className="form-group">
+                  <input type="button" 
+                    className="btn btn-danger mr-5" 
+                    value="Cancel" 
+                    onClick={resetPostContent} />
+                  <input type="submit" 
+                    className="btn btn-primary" 
+                    value="Post" 
+                    />
+                </div>
+              </fieldset>
+            </form>
           </div>
-          {errorMessage !== null &&
-            <div className="form-group">
-              <span className="text-danger">{errorMessage}</span>
-            </div>
-          }
-          <div className="form-group">
-            <input type="button" 
-              className="btn btn-danger mr-5" 
-              value="Cancel" 
-              onClick={resetPostContent} />
-            <input type="submit" 
-              className="btn btn-primary" 
-              value="Post" 
-              />
-          </div>
-        </fieldset>
-      </form>
+        <div className="col-1"></div>
+      </div>
 
-      <hr />
-      <h1>Forum</h1>
+      <h1 className="custom-subheading">Forum</h1>
       <div>
         {isLoading ?
           <div>Loading posts...</div>
@@ -81,10 +110,7 @@ export default function Forum(props) {
             <span className="text-muted">No posts have been submitted.</span>
             :
             posts.map((x) =>
-              <div className="border my-3 p-3">
-                <h6 className="text-primary">{x.username}</h6>
-                <div dangerouslySetInnerHTML={{ __html: x.text }} />
-              </div>
+              <Post post={x} setReply={setReplyStatus}/>
             )
         }
       </div>

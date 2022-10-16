@@ -35,6 +35,10 @@ code {
   background-color: var(--bg-color);
 }
 
+.bg-color-secondary {
+  background-color: var(--primary-color);
+}
+
 .custom-nav {
   font-family: Roboto Slab, serif;
   color: var(--secondary-color);
@@ -106,4 +110,12 @@ code {
 .footer {
   background-color: var(--bg-color);
   color: var(--primary-color);
+}
+
+.text-color-secondary {
+  color: var(--secondary-color)
+}
+
+.text-color-primary {
+  color: var(--bg-color)
 }

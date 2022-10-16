@@ -142,7 +142,6 @@ export default function Register(props) {
             </div>
             <div className="form-group custom-input">
               <input type="submit" className="btn btn-primary mr-5" value="Register" />
-              <Link className="btn btn-outline-dark" to="/">Cancel</Link>
             </div>
             {errors.APIerror !== null &&
               <div className="form-group">
