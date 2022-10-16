@@ -27,8 +27,8 @@ export default function MyProfile(props) {
                       </div>
                       {/* Display of user info */}
                       <h4 className="mb-2"> Username: {props.user.username}</h4>
-                      <p className=" text-muted mb-4"> First Name : {props.user.first_name} </p>
-                      <p className=" text-muted mb-4"> Last Name : {props.user.last_name} </p>
+                      <p className=" text-muted mb-4" id = 'first'> First Name : {props.user.first_name} </p>
+                      <p className=" text-muted mb-4 " id = 'last'> Last Name : {props.user.last_name} </p>
                     </div>
                     <div className = ' container d-flex justify-content-between'>
                         <button type = 'button' className='btn btn-lg btn-info btn-rounded w-50 m-3'

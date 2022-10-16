@@ -19,5 +19,6 @@ test('Email input is disabled', () =>{
     // eslint-diszable-next-line testing-library/no-node-access
     
     const email = screen.getByLabelText('Email')
-    expect(email).tobeDisabled();
+    expect(email).toHaveProperty('disabled',true);
 })
+
