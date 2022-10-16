@@ -16,8 +16,8 @@ async function verifyUser(username, password) {
   return user;
 }
 
-async function findUser(id) {
-  const response = await axios.get(API_HOST + `/api/users/select/${id}`);
+async function findUser(username) {
+  const response = await axios.get(API_HOST + `/api/users/select/${username}`);
 
   return response.data;
 }
