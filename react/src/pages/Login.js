@@ -46,7 +46,7 @@ export default function Login(props) {
         <div className="col-md-6">
           <form onSubmit={handleSubmit}>
             <div className="form-group custom-input">
-              <label htmlFor="username" className="control-label">Username</label>
+              <label htmlFor="username" className="control-label">Email</label>
               <input name="username" type="email" id="username" className="form-control"
                 value={fields.username} onChange={handleInputChange} />
             </div>
