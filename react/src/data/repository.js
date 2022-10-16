@@ -44,6 +44,18 @@ async function getPosts() {
   return response.data;
 }
 
+async function getParentPosts() {
+  const response = await axios.get(API_HOST + "/api/posts/parents")
+
+  return response.data;
+}
+
+async function getReplies(ID) {
+  const response = await axios.get(API_HOST + `/api/posts/replies/${ID}`)
+  
+  return response.data;
+}
+
 async function createPost(post) {
   const response = await axios.post(API_HOST + "/api/posts", post);
 
@@ -70,7 +82,7 @@ function removeUser() {
 
 export {
   verifyUser, findUser, createUser,
-  getPosts, createPost,
+  getPosts, getParentPosts, getReplies, createPost,
   getUser, removeUser,createReply,
   deleteUser, updateUser
 }

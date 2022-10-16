@@ -5,6 +5,12 @@ module.exports = (express, app) => {
   // Select all posts.
   router.get("/", controller.all);
 
+  // Select all posts that are NOT replies
+  router.get("/parents", controller.parents)
+
+  // Select all posts that are replies to post with ID
+  router.get("/replies/:ID", controller.replies)
+
   // Create a new post.
   router.post("/", controller.create);
 
