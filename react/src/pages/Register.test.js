@@ -15,8 +15,8 @@ beforeEach(() => {
         </Router>)
     container = utils.container
 })
-
-test('checking of input input fields',() => {
+//testing to see if inputs fields are wokring when someone registers
+test('checking of input input fields', async() => {
     // eslint-disable-next-line testing-library/no-node-access
     let form = container.querySelector('form')
     const email = screen.getByLabelText('Email')
@@ -24,6 +24,7 @@ test('checking of input input fields',() => {
     const confirm = screen.getByLabelText('Confirm password')
     const first = screen.getByLabelText('First name')
     const last = screen.getByLabelText('Last name')
+    const button = screen.getByDisplayValue('Register')
 
     fireEvent.change(email,{target: {value: 'qwe@rmit'}});
     fireEvent.change(password, {target: {value : '123456'}});
@@ -36,4 +37,5 @@ test('checking of input input fields',() => {
     expect(confirm.value).toBe('123456')
     expect(first.value).toBe('Ricky')
     expect(last.value).toBe('Truong')
+    fireEvent.click(button)
 })

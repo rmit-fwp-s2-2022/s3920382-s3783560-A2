@@ -14,9 +14,9 @@ beforeEach(() => {
         </Router>)
     container = utils.container
 })
-
+//test to to weather email is text input is disabled, user cannot change it
 test('Email input is disabled', () =>{
-    // eslint-disable-next-line testing-library/no-node-access
+    // eslint-diszable-next-line testing-library/no-node-access
     
     const email = screen.getByLabelText('Email')
     expect(email).tobeDisabled();
