@@ -111,3 +111,11 @@ code {
   background-color: var(--bg-color);
   color: var(--primary-color);
 }
+
+.text-color-secondary {
+  color: var(--secondary-color)
+}
+
+.text-color-primary {
+  color: var(--bg-color)
+}

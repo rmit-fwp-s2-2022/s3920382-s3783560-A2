@@ -10,28 +10,30 @@ export default function Forum(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [posts, setPosts] = useState([]);
 
-  const [replyTo, setReplyTo] = useState(null)
+  const [replyTo, setReplyTo] = useState({postID: null, postOwner: null})
 
-  console.log(`reply to is "${replyTo}"`)
-  const setReplyStatus = (replyID) => {
-    if (replyTo === replyID) {
-      setReplyTo(null)
+  console.log(`reply to is "${replyTo.postID}"`)
+
+  const setReplyStatus = ({postID: replyID, postOwner: owner}) => {
+    if (replyTo.postID === replyID) {
+      setReplyTo({postID: null, postOwner: null})
     } else {
-      setReplyTo(replyID)
+      setReplyTo({postID: replyID, postOwner: owner })
     }
   }
 
 
   // Load posts.
+
+  async function loadPosts() {
+    const currentPosts = await getParentPosts();
+
+    setPosts(currentPosts.slice().reverse());
+    setIsLoading(false);
+    setReplyTo({postID: null, postOwner: null})
+  }
+
   useEffect(() => {
-    async function loadPosts() {
-      const currentPosts = await getParentPosts();
-
-      setPosts(currentPosts.slice().reverse());
-      setIsLoading(false);
-      setReplyTo(null)
-    }
-
     loadPosts();
   }, []);
 
@@ -47,46 +49,59 @@ export default function Forum(props) {
     if(post.replace(/<(.|\n)*?>/g, "").trim().length === 0) {
       setErrorMessage("A post cannot be empty.");
       return;
+    } else if (post.replace(/<(.|\n)*?>/g, "").trim().length > 600) {
+      setErrorMessage("Posts must be under 600 characters")
+      return
     }
 
     // Create post.
-    const newPost = { text: post, username: props.user.username, parentID: replyTo};
+    const newPost = { text: post, username: props.user.username, parentID: replyTo.postID};
     await createPost(newPost);
 
     // Add post to locally stored posts.
     setPosts([newPost, ...posts]);
-
+    await loadPosts();
     resetPostContent();
+    
   };
 
   return (
-    <div className="">
-      <form className="justify-content-center" onSubmit={handleSubmit}>
-        <fieldset>
-          <legend className="custom-subheading">New Post</legend>
-          {replyTo !== null && <span>in reply to post {replyTo}</span>}
-          <div className="form-group bg-color-secondary" style={{ paddingBottom: "60px" }}>
-              <ReactQuill theme="snow" value={post} onChange={setPost} style={{ height: "180px" }} />
+    <div className="container">
+      <div className="row">
+        <div className="col-1"></div>
+          <div className="col-10">
+            <form className="justify-content-center" onSubmit={handleSubmit}>
+              <fieldset>
+                <legend className="custom-subheading">New Post</legend>
+                {replyTo.postID !== null && 
+                <span style={{marginBottom:"20px"}} className="custom-subheading">Replying to 
+                <span className="text-color-secondary "> {replyTo.postOwner}</span>
+                </span>}
+                <div className="form-group bg-color-secondary" style={{ paddingBottom: "60px" }}>
+                    <ReactQuill theme="snow" value={post} onChange={setPost} style={{ height: "180px" }} />
+                </div>
+                {errorMessage !== null &&
+                  <div className="form-group">
+                    <span className="text-danger">{errorMessage}</span>
+                  </div>
+                }
+                <div className="form-group">
+                  <input type="button" 
+                    className="btn btn-danger mr-5" 
+                    value="Cancel" 
+                    onClick={resetPostContent} />
+                  <input type="submit" 
+                    className="btn btn-primary" 
+                    value="Post" 
+                    />
+                </div>
+              </fieldset>
+            </form>
           </div>
-          {errorMessage !== null &&
-            <div className="form-group">
-              <span className="text-danger">{errorMessage}</span>
-            </div>
-          }
-          <div className="form-group">
-            <input type="button" 
-              className="btn btn-danger mr-5" 
-              value="Cancel" 
-              onClick={resetPostContent} />
-            <input type="submit" 
-              className="btn btn-primary" 
-              value="Post" 
-              />
-          </div>
-        </fieldset>
-      </form>
+        <div className="col-1"></div>
+      </div>
 
-      <h1>Forum</h1>
+      <h1 className="custom-subheading">Forum</h1>
       <div>
         {isLoading ?
           <div>Loading posts...</div>
