@@ -25,6 +25,7 @@ test('Login with false credentials', async () => {
     //grabbing label of login page
     const email = screen.getByLabelText('Email')
     const password = screen.getByLabelText('Password')
+    const button = screen.getByDisplayValue('Login')
 
     // eslint-disable-next-line testing-library/no-node-access
     
@@ -33,6 +34,9 @@ test('Login with false credentials', async () => {
     fireEvent.change(password, {target: {value : '123456'}})
     expect(email.value).toBe('qwe@rmit')
     expect(password.value).toBe('123456')
+    
+    //simulate button click
+    fireEvent.click(button)
     const data = await verifyUser('qwe@rmit','123456')
     expect(data).toBe(null)
 
