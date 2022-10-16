@@ -23,11 +23,7 @@ export default function Update(props) {
 
     let finalFields = {...trimmedFields, 'username': props.user.username}
     // Create user.
-<<<<<<< HEAD
-    await updateUser(trimmedFields);
-=======
     const user = await updateUser(finalFields);
->>>>>>> e4abae31bed832b168762678ed4e4aa348d25d67
 
     props.setUser(user)
 
