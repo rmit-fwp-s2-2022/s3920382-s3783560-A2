@@ -14,12 +14,15 @@ db.sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
 // Include models.
 db.user = require("./models/user.js")(db.sequelize, DataTypes);
 db.post = require("./models/post.js")(db.sequelize, DataTypes);
-db.reply = require("./models/reply.js")(db.sequelize,DataTypes);
+// db.reply = require("./models/reply.js")(db.sequelize,DataTypes);
 
 // Relate post and user.
 db.post.belongsTo(db.user, { foreignKey: { name: "username", allowNull: false } });
+
+db.post.belongsTo(db.post, {foreignKey: { name: "parentID", allowNull: true}})
+
 //realtes replys of post
-db.reply.hasMany(db.post, { foreignKey : {reply_id : 'post_id', allowNull : false}});
+// db.reply.hasMany(db.post, { foreignKey : {reply_id : 'post_id', allowNull : false}});
 // Learn more about associations here: https://sequelize.org/master/manual/assocs.html
 
 // Include a sync option with seed data logic included.
